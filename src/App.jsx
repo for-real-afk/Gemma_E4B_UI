@@ -162,7 +162,7 @@ function App() {
       return;
     }
     if (file.size > MAX_FILE_SIZE) {
-      setFileError('File must be smaller than 10 MB.');
+      setFileError('File must be smaller than 3 MB.');
       e.target.value = '';
       return;
     }
