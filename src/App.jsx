@@ -7,8 +7,8 @@ import './index.css';
 const MAX_FILE_SIZE = 3 * 1024 * 1024;
 const ALLOWED_TYPES = ['application/pdf', 'image/png', 'image/jpeg', 'image/gif', 'image/webp', 'image/svg+xml'];
 const MODEL_PRICING = {
-  gemma: { input: 0.10 / 1_000_000, output: 0.40 / 1_000_000, label: 'Gemma' },
-  gpt4:  { input: 2.50 / 1_000_000, output: 10.00 / 1_000_000, label: 'GPT-4' },
+  gemma: { input: 0.10 / 1_000_000, output: 0.40  / 1_000_000, label: 'Gemma' },
+  gpt4:  { input: 1.10 / 1_000_000, output: 4.40  / 1_000_000, label: 'GPT-5 Nano' },
 };
 
 function App() {
@@ -223,6 +223,7 @@ function App() {
         formData.append('message', trimmed);
         formData.append('session_id', sesssionId);
         formData.append('user_id', userId);
+        formData.append('model', selectedModel);
 
         setUploadProgress(0);
         data = await new Promise((resolve, reject) => {
@@ -246,7 +247,7 @@ function App() {
         const response = await fetch(`${API_BASE_URL}/chat`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ message: trimmed, session_id: sesssionId, user_id: userId }),
+          body: JSON.stringify({ message: trimmed, session_id: sesssionId, user_id: userId, model: selectedModel }),
         });
         if (!response.ok) throw new Error('Failed to connect to Gemma E4B');
         data = await response.json();
@@ -357,8 +358,8 @@ function App() {
       <aside className="sidebar">
         <div className="sidebar-header">
           <div className="logo">
-            <div className="logo-icon">G</div>
-            <span>Gemma E4B</span>
+            <div className="logo-icon">A</div>
+            <span>AlumnxLabs</span>
           </div>
           <button
             className="new-chat-btn"
@@ -440,8 +441,8 @@ function App() {
         <main className="main-chat">
           <header className="chat-header">
             <div className="header-title">
-              <div className="header-title-icon">G</div>
-              <h1>GEMMA E4B</h1>
+              <div className="header-title-icon">T</div>
+              <h1>TOKENLENS</h1>
             </div>
             <button
               onClick={() => setTheme(prev => prev === 'dark' ? 'light' : 'dark')}
@@ -599,7 +600,7 @@ function App() {
                   ref={textareaRef}
                   value={input}
                   onChange={handleInput}
-                  placeholder={`Message ${selectedModel === 'gpt4' ? 'GPT-4' : 'Gemma E4B'}...`}
+                  placeholder={`Message ${selectedModel === 'gpt4' ? 'GPT-5 Nano' : 'TokenLens'}...`}
                   rows="1"
                   onKeyDown={(e) => {
                     if (e.key === 'Enter' && !e.shiftKey) {
@@ -622,7 +623,7 @@ function App() {
                     className="model-select"
                   >
                     <option value="gemma">Gemma</option>
-                    <option value="gpt4">GPT-4</option>
+                    <option value="gpt4">GPT-5 Nano</option>
                   </select>
                   <button
                     type="button"
@@ -638,7 +639,7 @@ function App() {
                   </button>
                 </div>
               </div>
-              <p className="disclaimer">{selectedModel === 'gpt4' ? 'GPT-4' : 'Gemma E4B'} can make mistakes. Check important info.</p>
+              <p className="disclaimer">{selectedModel === 'gpt4' ? 'GPT-5 Nano' : 'Gemma E4B'} can make mistakes. Check important info.</p>
             </form>
           </footer>
         </main>
