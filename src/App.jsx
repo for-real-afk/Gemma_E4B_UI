@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Plus, Settings, Send, User, Paperclip, Trash2, X, FileText, Image, LayoutDashboard, Sun, Moon } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import MetricsView from './MetricsView';
+import alumnxLogo from './assets/alumnxlogo_new.png';
 import './index.css';
 
 const MAX_FILE_SIZE = 3 * 1024 * 1024;
@@ -358,8 +359,7 @@ function App() {
       <aside className="sidebar">
         <div className="sidebar-header">
           <div className="logo">
-            <div className="logo-icon">A</div>
-            <span>AlumnxLabs</span>
+            <img src={alumnxLogo} alt="AlumnxLabs" className="logo-img" />
           </div>
           <button
             className="new-chat-btn"

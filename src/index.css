@@ -108,6 +108,12 @@ body {
     margin-bottom: 1.5rem;
 }
 
+.logo-img {
+    width: 140px;
+    height: auto;
+    object-fit: contain;
+}
+
 .logo-icon {
     width: 34px;
     height: 34px;
